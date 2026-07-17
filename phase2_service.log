@@ -1,39 +1,39 @@
-2026-07-17 15:30:22,274 [INFO] __main__: [T6] no training_state args available; deploy-time normalization semantics use CLI values/defaults (this is expected for older or pretrained_model-only checkpoints).
-2026-07-17 15:30:22,280 [INFO] __main__: Auto-loaded DatasetSchema from /home/josan/projects/labvla-mujoco/LabVLA-5B-Base/labvla_schema.json (schema_id=labutopia_franka8, source=manifest)
-2026-07-17 15:30:22,281 [INFO] __main__: [R7-F5/R8-F4] action_dim=8 resolved (CLI default None → auto-derive) from schema action_dims=(8,)
-2026-07-17 15:30:22,281 [INFO] __main__: No norm_stats found in checkpoint or via --norm_stats_path. Assuming model was trained without processor-level normalization (e.g. v3.0 finetune). Raw delta denormalization will be skipped.
-2026-07-17 15:30:22,281 [INFO] __main__: Loading LabVLA from /home/josan/projects/labvla-mujoco/LabVLA-5B-Base...
-2026-07-17 15:35:45,335 [INFO] __main__: [self-contained] using bundled VLM assets in /home/josan/projects/labvla-mujoco/LabVLA-5B-Base (overriding --vlm_path 'Qwen/Qwen3-VL-4B-Instruct')
-2026-07-17 15:35:45,335 [INFO] __main__: [C-V6-03] Reading checkpoint config from /home/josan/projects/labvla-mujoco/LabVLA-5B-Base/config.json
-2026-07-17 15:35:45,346 [INFO] root: Cuda backend detected, using cuda.
-2026-07-17 15:35:45,346 [WARNING] src.config.policies: Device 'None' is not available. Switching to 'cuda'.
-2026-07-17 15:35:45,346 [INFO] __main__: Deploy config (M-06 fix): training_phase=posttrain, action_mode=delta, knowledge_isolation=True, use_fast_tokenizer=True
+2026-07-17 15:58:45,008 [INFO] __main__: [T6] no training_state args available; deploy-time normalization semantics use CLI values/defaults (this is expected for older or pretrained_model-only checkpoints).
+2026-07-17 15:58:45,008 [INFO] __main__: Auto-loaded DatasetSchema from LabVLA-5B-Base/labvla_schema.json (schema_id=labutopia_franka8, source=manifest)
+2026-07-17 15:58:45,008 [INFO] __main__: [R7-F5/R8-F4] action_dim=8 resolved (CLI default None → auto-derive) from schema action_dims=(8,)
+2026-07-17 15:58:45,009 [INFO] __main__: No norm_stats found in checkpoint or via --norm_stats_path. Assuming model was trained without processor-level normalization (e.g. v3.0 finetune). Raw delta denormalization will be skipped.
+2026-07-17 15:58:45,009 [INFO] __main__: Loading LabVLA from LabVLA-5B-Base...
+2026-07-17 16:04:05,816 [INFO] __main__: [self-contained] using bundled VLM assets in LabVLA-5B-Base (overriding --vlm_path 'Qwen/Qwen3-VL-4B-Instruct')
+2026-07-17 16:04:05,816 [INFO] __main__: [C-V6-03] Reading checkpoint config from LabVLA-5B-Base/config.json
+2026-07-17 16:04:05,828 [INFO] root: Cuda backend detected, using cuda.
+2026-07-17 16:04:05,828 [WARNING] src.config.policies: Device 'None' is not available. Switching to 'cuda'.
+2026-07-17 16:04:05,829 [INFO] __main__: Deploy config (M-06 fix): training_phase=posttrain, action_mode=delta, knowledge_isolation=True, use_fast_tokenizer=True
 You are attempting to use Flash Attention 2 without specifying a torch dtype. This might lead to unexpected behaviour
-2026-07-17 15:32:12,676 [INFO] src.policies.LabVLA.modeling_labvla: [self-contained] built Qwen3-VL backbone weightlessly from /home/josan/projects/labvla-mujoco/LabVLA-5B-Base/vlm_config.json; weights come from the LabVLA checkpoint
-2026-07-17 15:32:12,676 [INFO] src.policies.LabVLA.modeling_labvla: LigerSwiGLUMLP manually patched on 36 Qwen3VL text decoder layers (liger_kernel=0.7.0)
-2026-07-17 15:32:14,004 [WARNING] src.policies.LabVLA.modeling_labvla: [LabVLA] training_phase='posttrain' with FAST-token training but pi05_block_attention_mask=False. The model will use HF decoder-only causal attention, NOT the π0.5/KI block-wise prefix-bidirectional mask. This default is kept only for bit-identical loading of legacy checkpoints. For a fresh, paper-faithful vlm_pretrain/posttrain+KI run set pi05_block_attention_mask=True (also requires attn_implementation='sdpa').
-2026-07-17 15:38:49,442 [INFO] __main__: [ki_head] classifier re-cast to fp32 after policy.to(bf16) (deploy parity with training)
-2026-07-17 15:38:49,443 [INFO] __main__: [L45] effective VLM asset path: /home/josan/projects/labvla-mujoco/LabVLA-5B-Base (external --vlm_path)
-The tokenizer you are loading from '/home/josan/projects/labvla-mujoco/LabVLA-5B-Base' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
-2026-07-17 15:33:48,473 [INFO] __main__: LabVLA loaded: chunk_size=50, output_chunk_size=50, max_action_dim=32, image_size=(224, 224), tokens_per_camera=64
-2026-07-17 15:33:48,473 [INFO] __main__: LabVLA loaded and ready for inference!
-2026-07-17 15:33:48,479 [INFO] __main__: ======================================================================
-2026-07-17 15:33:48,479 [INFO] __main__: LabVLA Deployment Server (3-Camera)
-2026-07-17 15:33:48,479 [INFO] __main__:   Checkpoint  : /home/josan/projects/labvla-mujoco/LabVLA-5B-Base
-2026-07-17 15:33:48,479 [INFO] __main__:   VLM Path    : Qwen/Qwen3-VL-4B-Instruct
-2026-07-17 15:33:48,479 [INFO] __main__:   Device      : cuda
-2026-07-17 15:33:48,479 [INFO] __main__:   Host        : 127.0.0.1:8000
-2026-07-17 15:33:48,479 [INFO] __main__:   Hostname    : PC-20260304DBUZ (127.0.1.1)
-2026-07-17 15:33:48,479 [INFO] __main__:   Action dim  : 8
-2026-07-17 15:33:48,479 [INFO] __main__:   Chunk size  : 50
-2026-07-17 15:33:48,479 [INFO] __main__:   Infer steps : 10
-2026-07-17 15:33:48,479 [INFO] __main__: ======================================================================
-2026-07-17 15:33:48,596 [INFO] deployment.websocket_server: Starting WebSocket policy server on 127.0.0.1:8000
-2026-07-17 15:33:48,597 [INFO] deployment.websocket_server: WebSocket security: auth=disabled max_message_size=16777216 bytes
-2026-07-17 15:33:48,597 [INFO] deployment.websocket_server: [M-27] inference executor: ThreadPoolExecutor(max_workers=4); backlog warning threshold=8
-2026-07-17 15:33:48,597 [INFO] deployment.websocket_server: [C22] admission control: max_inflight=8 (requests beyond this are rejected with error=overload)
-2026-07-17 15:33:49,045 [INFO] websockets.server: server listening on 127.0.0.1:8000
-2026-07-17 15:33:49,633 [ERROR] websockets.server: opening handshake failed
+2026-07-17 16:05:34,256 [INFO] src.policies.LabVLA.modeling_labvla: [self-contained] built Qwen3-VL backbone weightlessly from LabVLA-5B-Base/vlm_config.json; weights come from the LabVLA checkpoint
+2026-07-17 16:05:34,257 [INFO] src.policies.LabVLA.modeling_labvla: LigerSwiGLUMLP manually patched on 36 Qwen3VL text decoder layers (liger_kernel=0.7.0)
+2026-07-17 16:05:35,386 [WARNING] src.policies.LabVLA.modeling_labvla: [LabVLA] training_phase='posttrain' with FAST-token training but pi05_block_attention_mask=False. The model will use HF decoder-only causal attention, NOT the π0.5/KI block-wise prefix-bidirectional mask. This default is kept only for bit-identical loading of legacy checkpoints. For a fresh, paper-faithful vlm_pretrain/posttrain+KI run set pi05_block_attention_mask=True (also requires attn_implementation='sdpa').
+2026-07-17 16:02:17,803 [INFO] __main__: [ki_head] classifier re-cast to fp32 after policy.to(bf16) (deploy parity with training)
+2026-07-17 16:02:17,804 [INFO] __main__: [L45] effective VLM asset path: LabVLA-5B-Base (external --vlm_path)
+The tokenizer you are loading from 'LabVLA-5B-Base' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+2026-07-17 16:02:18,635 [INFO] __main__: LabVLA loaded: chunk_size=50, output_chunk_size=50, max_action_dim=32, image_size=(224, 224), tokens_per_camera=64
+2026-07-17 16:02:18,635 [INFO] __main__: LabVLA loaded and ready for inference!
+2026-07-17 16:02:18,651 [INFO] __main__: ======================================================================
+2026-07-17 16:02:18,651 [INFO] __main__: LabVLA Deployment Server (3-Camera)
+2026-07-17 16:02:18,651 [INFO] __main__:   Checkpoint  : LabVLA-5B-Base
+2026-07-17 16:02:18,651 [INFO] __main__:   VLM Path    : Qwen/Qwen3-VL-4B-Instruct
+2026-07-17 16:02:18,651 [INFO] __main__:   Device      : cuda
+2026-07-17 16:02:18,651 [INFO] __main__:   Host        : 127.0.0.1:8000
+2026-07-17 16:02:18,651 [INFO] __main__:   Hostname    : PC-20260304DBUZ (127.0.1.1)
+2026-07-17 16:02:18,652 [INFO] __main__:   Action dim  : 8
+2026-07-17 16:02:18,652 [INFO] __main__:   Chunk size  : 50
+2026-07-17 16:02:18,652 [INFO] __main__:   Infer steps : 10
+2026-07-17 16:02:18,652 [INFO] __main__: ======================================================================
+2026-07-17 16:02:18,806 [INFO] deployment.websocket_server: Starting WebSocket policy server on 127.0.0.1:8000
+2026-07-17 16:02:18,806 [INFO] deployment.websocket_server: WebSocket security: auth=disabled max_message_size=16777216 bytes
+2026-07-17 16:02:18,806 [INFO] deployment.websocket_server: [M-27] inference executor: ThreadPoolExecutor(max_workers=4); backlog warning threshold=8
+2026-07-17 16:02:18,806 [INFO] deployment.websocket_server: [C22] admission control: max_inflight=8 (requests beyond this are rejected with error=overload)
+2026-07-17 16:02:19,249 [INFO] websockets.server: server listening on 127.0.0.1:8000
+2026-07-17 16:02:20,329 [ERROR] websockets.server: opening handshake failed
 Traceback (most recent call last):
   File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
     request_line = yield from parse_line(read_line)
@@ -60,18 +60,738 @@ Traceback (most recent call last):
   File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
     raise self.protocol.handshake_exc
 websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
-2026-07-17 15:33:57,507 [INFO] websockets.server: connection open
-2026-07-17 15:33:57,507 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56892) opened
-2026-07-17 15:39:09,992 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56892) closed
-2026-07-17 15:39:10,221 [INFO] websockets.server: connection open
-2026-07-17 15:39:10,221 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56876) opened
-2026-07-17 15:39:12,935 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56876) closed
-2026-07-17 15:39:13,139 [INFO] websockets.server: connection open
-2026-07-17 15:39:13,139 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56888) opened
-2026-07-17 15:34:14,176 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56888) closed
-2026-07-17 15:34:14,377 [INFO] websockets.server: connection open
-2026-07-17 15:34:14,377 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56892) opened
-2026-07-17 15:34:17,067 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56892) closed
-2026-07-17 15:34:17,267 [INFO] websockets.server: connection open
-2026-07-17 15:34:17,268 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 59002) opened
-2026-07-17 15:34:19,931 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 59002) closed
+2026-07-17 16:02:25,366 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:02:30,403 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:07:37,064 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:07:42,081 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:07:47,094 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:02:50,453 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:02:55,427 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:03:00,474 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:03:05,481 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:03:10,495 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:03:15,515 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:03:20,527 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:03:25,543 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:08:32,200 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:08:37,211 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:08:42,222 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:03:45,589 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:03:50,585 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:03:55,605 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:04:00,620 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:04:05,641 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:04:10,623 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:04:15,660 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:04:20,669 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:04:56,397 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 16:05:51,153 [INFO] websockets.server: connection open
+2026-07-17 16:05:51,153 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 50534) opened
+2026-07-17 16:06:01,603 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 50534) closed
+2026-07-17 16:06:01,953 [INFO] websockets.server: connection open
+2026-07-17 16:06:01,953 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 50998) opened
+2026-07-17 16:06:03,646 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 50998) closed
+2026-07-17 16:06:03,952 [INFO] websockets.server: connection open
+2026-07-17 16:06:03,952 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 51002) opened
+2026-07-17 16:06:05,640 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 51002) closed
+2026-07-17 16:06:05,947 [INFO] websockets.server: connection open
+2026-07-17 16:06:05,948 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35364) opened
+2026-07-17 16:06:07,630 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35364) closed
+2026-07-17 16:06:07,925 [INFO] websockets.server: connection open
+2026-07-17 16:06:07,925 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35366) opened
+2026-07-17 16:11:11,262 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35366) closed
+2026-07-17 16:11:11,561 [INFO] websockets.server: connection open
+2026-07-17 16:11:11,561 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35368) opened
+2026-07-17 16:11:13,250 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35368) closed
+2026-07-17 16:11:13,540 [INFO] websockets.server: connection open
+2026-07-17 16:11:13,540 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35384) opened
+2026-07-17 16:11:15,220 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35384) closed
+2026-07-17 16:11:15,520 [INFO] websockets.server: connection open
+2026-07-17 16:11:15,520 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35388) opened
+2026-07-17 16:11:17,208 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 35388) closed
+2026-07-17 16:11:17,509 [INFO] websockets.server: connection open
+2026-07-17 16:11:17,509 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57574) opened
+2026-07-17 16:11:19,185 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57574) closed
+2026-07-17 16:11:19,481 [INFO] websockets.server: connection open
+2026-07-17 16:11:19,481 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57578) opened
+2026-07-17 16:11:21,169 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57578) closed
+2026-07-17 16:11:21,463 [INFO] websockets.server: connection open
+2026-07-17 16:11:21,463 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57592) opened
+2026-07-17 16:11:23,146 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57592) closed
+2026-07-17 16:11:23,433 [INFO] websockets.server: connection open
+2026-07-17 16:11:23,433 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57596) opened
+2026-07-17 16:06:23,460 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57596) closed
+2026-07-17 16:06:23,751 [INFO] websockets.server: connection open
+2026-07-17 16:06:23,751 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57608) opened
+2026-07-17 16:06:25,442 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 57608) closed
+2026-07-17 16:06:25,740 [INFO] websockets.server: connection open
+2026-07-17 16:06:25,740 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52348) opened
+2026-07-17 16:06:27,424 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52348) closed
+2026-07-17 16:06:27,733 [INFO] websockets.server: connection open
+2026-07-17 16:06:27,733 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52364) opened
+2026-07-17 16:06:29,416 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52364) closed
+2026-07-17 16:06:29,717 [INFO] websockets.server: connection open
+2026-07-17 16:06:29,718 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52366) opened
+2026-07-17 16:06:31,404 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52366) closed
+2026-07-17 16:06:31,697 [INFO] websockets.server: connection open
+2026-07-17 16:06:31,697 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52370) opened
+2026-07-17 16:11:35,041 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52370) closed
+2026-07-17 16:06:33,696 [INFO] websockets.server: connection open
+2026-07-17 16:06:33,696 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52378) opened
+2026-07-17 16:06:35,388 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 52378) closed
+2026-07-17 16:06:35,696 [INFO] websockets.server: connection open
+2026-07-17 16:06:35,696 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 34628) opened
+2026-07-17 16:06:37,382 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 34628) closed
+2026-07-17 16:06:37,680 [INFO] websockets.server: connection open
+2026-07-17 16:06:37,680 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 34642) opened
+2026-07-17 16:06:39,359 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 34642) closed
