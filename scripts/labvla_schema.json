@@ -1,0 +1,20 @@
+{
+  "schema_id": "labutopia_franka8",
+  "source": "manifest",
+  "source_path": "labvla_schema.json",
+  "robot_type": "franka",
+  "state_keys": ["observation.state"],
+  "action_keys": ["action"],
+  "state_dims": [8],
+  "action_dims": [8],
+  "delta_mask": [true, true, true, true, true, true, true, false],
+  "gripper_action_dims": [7],
+  "image_mapping": {
+    "camera_1_rgb": "observation.images.image0",
+    "camera_2_rgb": "observation.images.image1",
+    "camera_3_rgb": "observation.images.image2"
+  },
+  "arm_layout": {
+    "gripper_binarize_threshold": 0.5
+  }
+}
