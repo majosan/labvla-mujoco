@@ -1,0 +1,166 @@
+#!/usr/bin/env python3
+"""MuJoCo closed-loop client for LabVLA WebSocket inference service.
+
+Protocol (per connection):
+  1. Server sends metadata frame (msgpack).
+  2. Client sends observation frame (msgpack + ndarray encoding).
+  3. Server responds with action frame (50×8 float32).
+
+One connection is opened per step (matches the known-good Phase-1 protocol).
+"""
+
+import argparse
+import time
+import numpy as np
+import mujoco
+import msgpack
+import websocket
+from pathlib import Path
+
+SCENE_XML = Path(__file__).parent / "mujoco_scene.xml"
+CAM_NAMES = ["camera_1_rgb", "camera_2_rgb", "camera_3_rgb"]
+
+
+# ---------- msgpack ndarray helpers (identical to test_client.py) ----------
+
+def _pack_array(obj):
+    if isinstance(obj, np.ndarray):
+        return {
+            b"__ndarray__": True,
+            b"data": obj.tobytes(),
+            b"dtype": obj.dtype.str,
+            b"shape": obj.shape,
+        }
+    if isinstance(obj, np.generic):
+        return {b"__npgeneric__": True, b"data": obj.item(), b"dtype": obj.dtype.str}
+    return obj
+
+
+def _unpack_array(obj):
+    if isinstance(obj, dict):
+        if obj.get("__ndarray__") or obj.get(b"__ndarray__"):
+            data = obj.get("data", obj.get(b"data"))
+            dtype = np.dtype(obj.get("dtype", obj.get(b"dtype")))
+            shape = tuple(obj.get("shape", obj.get(b"shape")))
+            return np.frombuffer(data, dtype=dtype).reshape(shape)
+        return {k: _unpack_array(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_unpack_array(v) for v in obj]
+    return obj
+
+
+# ---------- one inference round-trip ----------
+
+def query_labvla(host: str, port: int, obs: dict) -> tuple[np.ndarray, float, dict]:
+    """
+    Open a fresh WebSocket, read metadata, send obs, receive actions.
+    Returns (actions (50,8), rtt_ms, metadata).
+    """
+    ws = websocket.create_connection(f"ws://{host}:{port}")
+    meta_raw = ws.recv()
+    metadata = msgpack.unpackb(meta_raw, raw=False)
+
+    t0 = time.perf_counter()
+    ws.send_binary(msgpack.packb(obs, default=_pack_array, use_bin_type=True))
+    reply_raw = ws.recv()
+    rtt_ms = (time.perf_counter() - t0) * 1000.0
+    ws.close()
+
+    result = _unpack_array(msgpack.unpackb(reply_raw, raw=False))
+    actions = np.asarray(result["actions"], dtype=np.float32)  # (50, 8)
+    return actions, rtt_ms, metadata
+
+
+# ---------- main ----------
+
+def main():
+    parser = argparse.ArgumentParser(description="MuJoCo LabVLA closed-loop client")
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--prompt", default="pick up the beaker")
+    parser.add_argument("--num_steps", type=int, default=5)
+    parser.add_argument("--physics_substeps", type=int, default=20,
+                        help="MuJoCo physics steps per control step")
+    args = parser.parse_args()
+
+    # ----- load scene -----
+    model = mujoco.MjModel.from_xml_path(str(SCENE_XML))
+    data = mujoco.MjData(model)
+    mujoco.mj_resetDataKeyframe(model, data, 0)  # "home" keyframe
+    mujoco.mj_forward(model, data)
+
+    # ----- offline renderer (CPU, 224×224) -----
+    renderer = mujoco.Renderer(model, height=224, width=224)
+
+    # ----- arm joint limits for safe delta clamping -----
+    arm_lo = np.array([model.jnt_range[model.joint(f"joint{i+1}").id, 0] for i in range(7)])
+    arm_hi = np.array([model.jnt_range[model.joint(f"joint{i+1}").id, 1] for i in range(7)])
+
+    print(f"[mujoco_client] Scene: {SCENE_XML.name}")
+    print(f"[mujoco_client] Prompt: '{args.prompt}'")
+    print(f"[mujoco_client] Steps : {args.num_steps} | physics substeps: {args.physics_substeps}")
+    print(f"[mujoco_client] Target: ws://{args.host}:{args.port}")
+    print()
+
+    metadata_logged = False
+
+    for step in range(args.num_steps):
+        step_t0 = time.perf_counter()
+
+        # 1. Read current 8-dim joint state (7 arm + left finger)
+        state = np.array(data.qpos[:8], dtype=np.float32)
+
+        # 2. Render 3 camera images (224×224×3 uint8)
+        images = {}
+        for cam in CAM_NAMES:
+            renderer.update_scene(data, camera=cam)
+            images[cam] = renderer.render().astype(np.uint8)
+
+        # 3. Build observation payload
+        obs = {
+            "camera_1_rgb": images["camera_1_rgb"],
+            "camera_2_rgb": images["camera_2_rgb"],
+            "camera_3_rgb": images["camera_3_rgb"],
+            "state": state,
+            "prompt": args.prompt,
+        }
+
+        # 4. Query LabVLA service
+        try:
+            actions, rtt_ms, metadata = query_labvla(args.host, args.port, obs)
+        except Exception as exc:
+            print(f"[step {step+1}] WebSocket error: {exc}")
+            break
+
+        if not metadata_logged:
+            print(f"[metadata] {metadata}")
+            metadata_logged = True
+
+        # 5. Apply first action step
+        #    action[0, :7] = arm delta (delta_mask=True)
+        #    action[0,  7] = gripper   (delta_mask=False → binarize at 0.5)
+        delta_arm = actions[0, :7].astype(float)
+        new_qpos = np.clip(state[:7] + delta_arm, arm_lo, arm_hi)
+        data.ctrl[:7] = new_qpos
+
+        gripper_raw = float(actions[0, 7])
+        data.ctrl[7] = 255.0 if gripper_raw > 0.5 else 0.0
+
+        # 6. Advance physics
+        for _ in range(args.physics_substeps):
+            mujoco.mj_step(model, data)
+
+        step_ms = (time.perf_counter() - step_t0) * 1000.0
+        print(
+            f"[step {step+1:2d}/{args.num_steps}] "
+            f"rtt={rtt_ms:7.1f}ms | total={step_ms:7.1f}ms | "
+            f"delta_arm=[{delta_arm.min():.4f}, {delta_arm.max():.4f}] | "
+            f"gripper_raw={gripper_raw:.4f} ctrl={data.ctrl[7]:.0f}"
+        )
+
+    print("\n[mujoco_client] Closed-loop run complete.")
+    print(f"[mujoco_client] Final qpos[:8]: {data.qpos[:8]}")
+
+
+if __name__ == "__main__":
+    main()

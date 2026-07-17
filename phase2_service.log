@@ -1,0 +1,77 @@
+2026-07-17 15:30:22,274 [INFO] __main__: [T6] no training_state args available; deploy-time normalization semantics use CLI values/defaults (this is expected for older or pretrained_model-only checkpoints).
+2026-07-17 15:30:22,280 [INFO] __main__: Auto-loaded DatasetSchema from /home/josan/projects/labvla-mujoco/LabVLA-5B-Base/labvla_schema.json (schema_id=labutopia_franka8, source=manifest)
+2026-07-17 15:30:22,281 [INFO] __main__: [R7-F5/R8-F4] action_dim=8 resolved (CLI default None → auto-derive) from schema action_dims=(8,)
+2026-07-17 15:30:22,281 [INFO] __main__: No norm_stats found in checkpoint or via --norm_stats_path. Assuming model was trained without processor-level normalization (e.g. v3.0 finetune). Raw delta denormalization will be skipped.
+2026-07-17 15:30:22,281 [INFO] __main__: Loading LabVLA from /home/josan/projects/labvla-mujoco/LabVLA-5B-Base...
+2026-07-17 15:35:45,335 [INFO] __main__: [self-contained] using bundled VLM assets in /home/josan/projects/labvla-mujoco/LabVLA-5B-Base (overriding --vlm_path 'Qwen/Qwen3-VL-4B-Instruct')
+2026-07-17 15:35:45,335 [INFO] __main__: [C-V6-03] Reading checkpoint config from /home/josan/projects/labvla-mujoco/LabVLA-5B-Base/config.json
+2026-07-17 15:35:45,346 [INFO] root: Cuda backend detected, using cuda.
+2026-07-17 15:35:45,346 [WARNING] src.config.policies: Device 'None' is not available. Switching to 'cuda'.
+2026-07-17 15:35:45,346 [INFO] __main__: Deploy config (M-06 fix): training_phase=posttrain, action_mode=delta, knowledge_isolation=True, use_fast_tokenizer=True
+You are attempting to use Flash Attention 2 without specifying a torch dtype. This might lead to unexpected behaviour
+2026-07-17 15:32:12,676 [INFO] src.policies.LabVLA.modeling_labvla: [self-contained] built Qwen3-VL backbone weightlessly from /home/josan/projects/labvla-mujoco/LabVLA-5B-Base/vlm_config.json; weights come from the LabVLA checkpoint
+2026-07-17 15:32:12,676 [INFO] src.policies.LabVLA.modeling_labvla: LigerSwiGLUMLP manually patched on 36 Qwen3VL text decoder layers (liger_kernel=0.7.0)
+2026-07-17 15:32:14,004 [WARNING] src.policies.LabVLA.modeling_labvla: [LabVLA] training_phase='posttrain' with FAST-token training but pi05_block_attention_mask=False. The model will use HF decoder-only causal attention, NOT the π0.5/KI block-wise prefix-bidirectional mask. This default is kept only for bit-identical loading of legacy checkpoints. For a fresh, paper-faithful vlm_pretrain/posttrain+KI run set pi05_block_attention_mask=True (also requires attn_implementation='sdpa').
+2026-07-17 15:38:49,442 [INFO] __main__: [ki_head] classifier re-cast to fp32 after policy.to(bf16) (deploy parity with training)
+2026-07-17 15:38:49,443 [INFO] __main__: [L45] effective VLM asset path: /home/josan/projects/labvla-mujoco/LabVLA-5B-Base (external --vlm_path)
+The tokenizer you are loading from '/home/josan/projects/labvla-mujoco/LabVLA-5B-Base' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+2026-07-17 15:33:48,473 [INFO] __main__: LabVLA loaded: chunk_size=50, output_chunk_size=50, max_action_dim=32, image_size=(224, 224), tokens_per_camera=64
+2026-07-17 15:33:48,473 [INFO] __main__: LabVLA loaded and ready for inference!
+2026-07-17 15:33:48,479 [INFO] __main__: ======================================================================
+2026-07-17 15:33:48,479 [INFO] __main__: LabVLA Deployment Server (3-Camera)
+2026-07-17 15:33:48,479 [INFO] __main__:   Checkpoint  : /home/josan/projects/labvla-mujoco/LabVLA-5B-Base
+2026-07-17 15:33:48,479 [INFO] __main__:   VLM Path    : Qwen/Qwen3-VL-4B-Instruct
+2026-07-17 15:33:48,479 [INFO] __main__:   Device      : cuda
+2026-07-17 15:33:48,479 [INFO] __main__:   Host        : 127.0.0.1:8000
+2026-07-17 15:33:48,479 [INFO] __main__:   Hostname    : PC-20260304DBUZ (127.0.1.1)
+2026-07-17 15:33:48,479 [INFO] __main__:   Action dim  : 8
+2026-07-17 15:33:48,479 [INFO] __main__:   Chunk size  : 50
+2026-07-17 15:33:48,479 [INFO] __main__:   Infer steps : 10
+2026-07-17 15:33:48,479 [INFO] __main__: ======================================================================
+2026-07-17 15:33:48,596 [INFO] deployment.websocket_server: Starting WebSocket policy server on 127.0.0.1:8000
+2026-07-17 15:33:48,597 [INFO] deployment.websocket_server: WebSocket security: auth=disabled max_message_size=16777216 bytes
+2026-07-17 15:33:48,597 [INFO] deployment.websocket_server: [M-27] inference executor: ThreadPoolExecutor(max_workers=4); backlog warning threshold=8
+2026-07-17 15:33:48,597 [INFO] deployment.websocket_server: [C22] admission control: max_inflight=8 (requests beyond this are rejected with error=overload)
+2026-07-17 15:33:49,045 [INFO] websockets.server: server listening on 127.0.0.1:8000
+2026-07-17 15:33:49,633 [ERROR] websockets.server: opening handshake failed
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 138, in parse
+    request_line = yield from parse_line(read_line)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 320, in parse_line
+    line = yield from read_line(MAX_LINE_LENGTH)
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/streams.py", line 46, in read_line
+    raise EOFError(f"stream ends after {p} bytes, before end of line")
+EOFError: stream ends after 0 bytes, before end of line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/server.py", line 547, in parse
+    request = yield from Request.parse(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/http11.py", line 140, in parse
+    raise EOFError("connection closed while reading HTTP request line") from exc
+EOFError: connection closed while reading HTTP request line
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 356, in conn_handler
+    await connection.handshake(
+  File "/home/josan/miniforge3/envs/labvla-cu124/lib/python3.10/site-packages/websockets/asyncio/server.py", line 207, in handshake
+    raise self.protocol.handshake_exc
+websockets.exceptions.InvalidMessage: did not receive a valid HTTP request
+2026-07-17 15:33:57,507 [INFO] websockets.server: connection open
+2026-07-17 15:33:57,507 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56892) opened
+2026-07-17 15:39:09,992 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56892) closed
+2026-07-17 15:39:10,221 [INFO] websockets.server: connection open
+2026-07-17 15:39:10,221 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56876) opened
+2026-07-17 15:39:12,935 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56876) closed
+2026-07-17 15:39:13,139 [INFO] websockets.server: connection open
+2026-07-17 15:39:13,139 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56888) opened
+2026-07-17 15:34:14,176 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56888) closed
+2026-07-17 15:34:14,377 [INFO] websockets.server: connection open
+2026-07-17 15:34:14,377 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56892) opened
+2026-07-17 15:34:17,067 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 56892) closed
+2026-07-17 15:34:17,267 [INFO] websockets.server: connection open
+2026-07-17 15:34:17,268 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 59002) opened
+2026-07-17 15:34:19,931 [INFO] deployment.websocket_server: Connection from ('127.0.0.1', 59002) closed
