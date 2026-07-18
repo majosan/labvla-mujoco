@@ -58,7 +58,6 @@ dependencies:
       - farama-notifications==0.0.4
       - filelock==3.25.2
       - flag-gems==5.0.0
-      - flash-attn==2.8.3
       - frozenlist==1.8.0
       - fsspec==2025.9.0
       - gitdb==4.0.12
@@ -157,7 +156,7 @@ dependencies:
       - safetensors==0.7.0
       - scipy==1.15.3
       - sentry-sdk==2.55.0
-      - setuptools==82.0.1
+      - setuptools==80.0.0
       - shellingham==1.5.4
       - six==1.17.0
       - smmap==5.0.3
@@ -168,7 +167,7 @@ dependencies:
       - toml==0.10.2
       - tomli==2.4.1
       - torch==2.7.1
-      - torchaudio==2.7.1+cu126
+      - torchaudio==2.7.1
       - torchcodec==0.5
       - torchvision==0.22.1
       - tqdm==4.67.3

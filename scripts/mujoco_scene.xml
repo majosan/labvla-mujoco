@@ -1,6 +1,6 @@
 <mujoco model="labvla_scene">
   <!-- Pull in the full Franka Panda model (joints, actuators, meshes, keyframes) -->
-  <include file="/home/josan/venv/ai-chem-lab/mujoco_menagerie/franka_emika_panda/panda.xml"/>
+  <include file="/home/josan/ai-chem-lab/mujoco_menagerie/franka_emika_panda/panda.xml"/>
 
   <!--
     Layout:

@@ -4,7 +4,7 @@
 
 set -e
 
-PROJECT_DIR=~/projects/labvla-mujoco
+PROJECT_DIR=~/labvla-mujoco
 CONDA_BASE=/home/josan/miniforge3
 ENV_NAME=labvla-cu124
 LOG_FILE=$PROJECT_DIR/phase2_run.log

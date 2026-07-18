@@ -1,0 +1,24 @@
+[Phase2] Starting LabVLA inference service (background)...
+[Phase2] Service PID: 259895
+[Phase2] Waiting for service to be ready (may take 2-4 min)...
+[Phase2] Service port is open! (after 90s)
+
+[Phase2] Running MuJoCo closed-loop client (5 frames)...
+[mujoco_client] Scene: mujoco_scene.xml
+[mujoco_client] Prompt: 'pick up the beaker'
+[mujoco_client] Steps : 5 | physics substeps: 20
+[mujoco_client] Target: ws://127.0.0.1:8000
+
+[metadata] {'policy_type': 'labvla', 'action_dim': 8, 'chunk_size': 50, 'model_chunk_size': 50, 'output_chunk_size': 50, 'state_dim': 8, 'max_state_dim': 32, 'max_action_dim': 32, 'num_inference_steps': 10, 'num_cameras': 3, 'camera_keys': ['camera_1_rgb', 'camera_2_rgb', 'camera_3_rgb'], 'camera_key_aliases': {}, 'state_keys': ['state', 'observation/state'], 'action_mode': 'delta', 'prompt_required': True, 'default_prompt_set': False}
+[step  1/5] rtt=  740.1ms | total= 1252.0ms | delta_arm=[-1.7689, 0.9728] | gripper_raw=-0.8215 ctrl=0
+[step  2/5] rtt=  258.2ms | total=  416.6ms | delta_arm=[-2.1290, 1.7254] | gripper_raw=-0.9791 ctrl=0
+[step  3/5] rtt=  174.6ms | total=  331.0ms | delta_arm=[-2.6515, 1.5913] | gripper_raw=-1.0211 ctrl=0
+[step  4/5] rtt=  173.0ms | total=  340.5ms | delta_arm=[-2.9899, 1.9884] | gripper_raw=0.7327 ctrl=255
+[step  5/5] rtt=  171.5ms | total=  328.2ms | delta_arm=[-3.0744, 2.0616] | gripper_raw=1.0585 ctrl=255
+
+[mujoco_client] Closed-loop run complete.
+[mujoco_client] Final qpos[:8]: [ 0.84697303 -1.08638441  0.57892984 -2.8212228  -0.51897694  2.81126081
+ -2.03628219  0.02547702]
+
+[Phase2] Cleaning up service (PID 259895)...
+[Phase2] ✅ Closed-loop validation complete!
