@@ -1,0 +1,17 @@
+===== T2 TACTILE: mujoco_client_tactile.py (object=beaker) =====
+[mujoco_client] Scene : mujoco_scene.xml
+[mujoco_client] Prompt: 'pick up the beaker'
+[mujoco_client] Steps : 5 | physics substeps: 20
+[mujoco_client] Target: ws://127.0.0.1:8000
+[mujoco_client] Tactile: sim (beaker)
+
+[metadata] {'policy_type': 'labvla', 'action_dim': 8, 'chunk_size': 50, 'model_chunk_size': 50, 'output_chunk_size': 50, 'state_dim': 8, 'max_state_dim': 32, 'max_action_dim': 32, 'num_inference_steps': 10, 'num_cameras': 3, 'camera_keys': ['camera_1_rgb', 'camera_2_rgb', 'camera_3_rgb'], 'camera_key_aliases': {}, 'state_keys': ['state', 'observation/state'], 'action_mode': 'delta', 'prompt_required': True, 'default_prompt_set': False}
+[step  1/5] rtt= 3075.6ms | total= 3438.4ms | delta_arm=[-2.0123, 1.3274] | gripper_raw=-0.7280 ctrl=0 | tactile=[0.000, 0.000] nz=  0/124 force=0.00
+[step  2/5] rtt= 2872.5ms | total= 3075.1ms | delta_arm=[-2.2361, 1.2545] | gripper_raw=-0.9990 ctrl=0 | tactile=[0.062, 0.477] nz=124/124 force=1.00
+[step  3/5] rtt= 2853.8ms | total= 3056.3ms | delta_arm=[-2.5246, 1.8724] | gripper_raw=-0.9764 ctrl=0 | tactile=[0.062, 0.482] nz=124/124 force=1.00
+[step  4/5] rtt= 2853.0ms | total= 3053.2ms | delta_arm=[-2.9039, 1.6888] | gripper_raw=-0.7626 ctrl=0 | tactile=[0.029, 0.467] nz=124/124 force=1.00
+[step  5/5] rtt= 2805.6ms | total= 3004.0ms | delta_arm=[-2.9210, 2.0474] | gripper_raw=-1.1077 ctrl=0 | tactile=[0.056, 0.477] nz=124/124 force=1.00
+
+[mujoco_client] Closed-loop run complete.
+[mujoco_client] Final qpos[:8]: [ 0.6663147  -1.13478418  0.49453019 -2.82212521 -0.71373922  2.79070379
+ -2.04380697  0.00745024]

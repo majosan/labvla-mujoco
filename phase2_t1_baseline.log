@@ -1,0 +1,16 @@
+===== T1 BASELINE: mujoco_client.py (no tactile) =====
+[mujoco_client] Scene: mujoco_scene.xml
+[mujoco_client] Prompt: 'pick up the beaker'
+[mujoco_client] Steps : 5 | physics substeps: 20
+[mujoco_client] Target: ws://127.0.0.1:8000
+
+[metadata] {'policy_type': 'labvla', 'action_dim': 8, 'chunk_size': 50, 'model_chunk_size': 50, 'output_chunk_size': 50, 'state_dim': 8, 'max_state_dim': 32, 'max_action_dim': 32, 'num_inference_steps': 10, 'num_cameras': 3, 'camera_keys': ['camera_1_rgb', 'camera_2_rgb', 'camera_3_rgb'], 'camera_key_aliases': {}, 'state_keys': ['state', 'observation/state'], 'action_mode': 'delta', 'prompt_required': True, 'default_prompt_set': False}
+[step  1/5] rtt=12562.3ms | total=12939.8ms | delta_arm=[-1.7129, 1.2380] | gripper_raw=1.0800 ctrl=255
+[step  2/5] rtt= 2846.6ms | total= 3053.0ms | delta_arm=[-2.3407, 1.6651] | gripper_raw=-0.9798 ctrl=0
+[step  3/5] rtt= 2842.8ms | total= 3035.3ms | delta_arm=[-2.6500, 1.7278] | gripper_raw=1.0976 ctrl=255
+[step  4/5] rtt= 2839.4ms | total= 3030.1ms | delta_arm=[-2.8958, 1.9292] | gripper_raw=-1.0518 ctrl=0
+[step  5/5] rtt= 2831.9ms | total= 3034.3ms | delta_arm=[-2.9016, 2.7490] | gripper_raw=-0.9967 ctrl=0
+
+[mujoco_client] Closed-loop run complete.
+[mujoco_client] Final qpos[:8]: [ 0.76173681 -1.08681152  0.61036387 -2.82169197 -0.58219     2.87855962
+ -2.03434084  0.01953539]
