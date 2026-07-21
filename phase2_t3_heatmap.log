@@ -1,0 +1,18 @@
+===== T3 HEATMAP: mujoco_client_heatmap.py (object=beaker) =====
+[mujoco_client] Scene : mujoco_scene.xml
+[mujoco_client] Prompt: 'pick up the beaker'
+[mujoco_client] Steps : 5 | physics substeps: 20
+[mujoco_client] Target: ws://127.0.0.1:8000
+[mujoco_client] Tactile: sim (beaker)
+[mujoco_client] Heatmap: ON (every 1 frame(s))
+
+[metadata] {'policy_type': 'labvla', 'action_dim': 8, 'chunk_size': 50, 'model_chunk_size': 50, 'output_chunk_size': 50, 'state_dim': 8, 'max_state_dim': 32, 'max_action_dim': 32, 'num_inference_steps': 10, 'num_cameras': 3, 'camera_keys': ['camera_1_rgb', 'camera_2_rgb', 'camera_3_rgb'], 'camera_key_aliases': {}, 'state_keys': ['state', 'observation/state'], 'action_mode': 'delta', 'prompt_required': True, 'default_prompt_set': False}
+[step  1/5] rtt=10078.0ms | total=11026.2ms | delta_arm=[-1.9611, 1.2798] | gripper_raw=-1.0237 ctrl=0 | tactile=[0.000, 0.000] nz=  0/124 force=0.00 | grid_max=0.000 grid_sum=0.00
+[step  2/5] rtt= 1633.1ms | total= 2017.5ms | delta_arm=[-1.8967, 1.3898] | gripper_raw=-0.8986 ctrl=0 | tactile=[0.023, 0.482] nz=124/124 force=1.00 | grid_max=0.482 grid_sum=28.43
+[step  3/5] rtt= 1628.5ms | total= 1877.3ms | delta_arm=[-2.6672, 2.2592] | gripper_raw=-0.8146 ctrl=0 | tactile=[0.053, 0.488] nz=124/124 force=1.00 | grid_max=0.488 grid_sum=28.52
+[step  4/5] rtt= 1629.0ms | total= 1881.9ms | delta_arm=[-3.0417, 1.7885] | gripper_raw=1.0839 ctrl=255 | tactile=[0.039, 0.479] nz=124/124 force=1.00 | grid_max=0.479 grid_sum=28.14
+[step  5/5] rtt= 1632.6ms | total= 1880.8ms | delta_arm=[-3.0207, 2.1332] | gripper_raw=0.6327 ctrl=255 | tactile=[0.000, 0.000] nz=  0/124 force=0.00 | grid_max=0.000 grid_sum=0.00
+
+[mujoco_client] Closed-loop run complete.
+[mujoco_client] Final qpos[:8]: [ 0.80828589 -1.08881427  0.62856518 -2.81893346 -0.7156281   2.85960373
+ -2.03311396  0.02552157]

@@ -1,0 +1,17 @@
+[Phase2-Heatmap] Starting LabVLA inference service (background)...
+[Phase2-Heatmap] Service PID: 33463
+[Phase2-Heatmap] Waiting for service to be ready (may take 4-5 min)...
+[Phase2-Heatmap] Service port is open! (after 245s)
+
+[Phase2-Heatmap] Running heatmap client (5 frames, object=beaker, extra='')...
+Traceback (most recent call last):
+  File "/home/josan/projects/labvla-mujoco/scripts/mujoco_client_heatmap.py", line 220, in <module>
+    main()
+  File "/home/josan/projects/labvla-mujoco/scripts/mujoco_client_heatmap.py", line 107, in main
+    model = mujoco.MjModel.from_xml_path(str(SCENE_XML))
+ValueError: XML Error: Error opening file '/home/josan/ai-chem-lab/mujoco_menagerie/franka_emika_panda/panda.xml'
+Element 'include', line 3
+
+
+[Phase2-Heatmap] Cleaning up service (PID 33463)...
+[Phase2-Heatmap] ❌ Client exited with code 1
